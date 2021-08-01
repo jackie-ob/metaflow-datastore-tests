@@ -1,0 +1,14 @@
+#!/bin/bash
+
+source util.sh
+
+NONCE=$(uuidgen)
+MODE=$(basename $1)
+
+runmf $1 cas_hit run --nonce=$NONCE
+first_cas=$(echo "$took" | cut -d ' ' -f 1)
+# the artifact exists in the datastore, the second time should be faster
+runmf $1 cas_hit run --nonce=$NONCE
+second_cas=$(echo "$took" | cut -d ' ' -f 1)
+
+echo "cas_hit[$MODE][$METAFLOW_DATASTORE]: first $first_cas, second $second_cas" >&2

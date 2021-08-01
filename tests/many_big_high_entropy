@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source util.sh
+
+runmf $1 many_big_high_entropy run

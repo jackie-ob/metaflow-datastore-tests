@@ -1,0 +1,14 @@
+#!/bin/bash
+
+source util.sh
+
+export METAFLOW_RUN_MAX_NUM_SPLITS=1000000
+export METAFLOW_RUN_MAX_WORKERS=32
+export METAFLOW_RESUME_MAX_NUM_SPLITS=1000000
+export METAFLOW_RESUME_MAX_WORKERS=32
+export METAFLOW_RUN_RUN_ID_FILE=run_id
+rm -f run_id
+# run flow with one version...
+runmf $1 resume run
+# ...resume with another
+runmf $2 resume resume --origin-run-id=$(cat run_id) split

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+source util.sh
+NONCE=$(uuidgen)
+export METAFLOW_RUN_RUN_ID_FILE=run_id
+
+rm -f run_id
+# run flow with one version...
+runmf $1 clientapi_flow run --nonce=$NONCE
+# ...check with another
+runmf $2 clientapi_check run --run-id=$(cat run_id) --nonce=$NONCE

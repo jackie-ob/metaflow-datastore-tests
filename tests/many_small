@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source util.sh
+
+runmf $1 many_small run
