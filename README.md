@@ -23,7 +23,16 @@ git clone http://github.com/Netflix/metaflow
 git clone --branch convergence http://github.com/Netflix/metaflow metaflow-cc
 ```
 
-3. Run tests (this is going to take more than an hour, so consider using `screen`):
+4. Configure Metaflow datastore: Fix the bucket name and add these lines to `~/.metaflowconfig/config.json`:
+```
+{
+    "METAFLOW_DATASTORE_SYSROOT_S3": "s3://my-bucket/metaflow/",
+    "METAFLOW_DATATOOLS_SYSROOT_S3": "s3://my-bucket/metaflow/data",
+    "METAFLOW_DEFAULT_DATASTORE": "s3"
+}
+```
+
+5. Run tests (this is going to take more than an hour, so consider using `screen`):
 ```
 cd metaflow-datastore-tests
 time ./run_tests.sh ../metaflow ../metaflow-cc/ > results.csv
