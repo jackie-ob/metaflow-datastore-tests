@@ -5,21 +5,19 @@ rm -Rf logs/*
 mkdir -p logs 
 
 first=$(basename $1)
-second=$(basename $2)
-echo "test datastore time:$first peakmem:$first time:$second peakmem:$second"
+echo "test datastore time:$first peakmem:$first"
 for test in tests/*
 do
     testbase=$(basename $test)
-    if [ -n "$3" ] && [ "$3" != "$testbase" ]
+    if [ -n "$2" ] && [ "$2" != "$testbase" ]
     then
         continue
     fi
-    for ds in local s3
+    for ds in local azure
     do
         echo -n "$testbase $ds"
-        METAFLOW_DATASTORE=$ds $test $1 $2
-        METAFLOW_DATASTORE=$ds $test $2 $1
+        METAFLOW_DATASTORE=$ds $test $1 $1
         base="logs/$testbase.$ds"
-        echo " $(cat $base.$first.timing) $(cat $base.$second.timing)"
+        echo " $(cat $base.$first.timing)"
     done
 done
