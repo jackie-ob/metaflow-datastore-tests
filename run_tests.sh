@@ -13,7 +13,7 @@ do
     then
         continue
     fi
-    for ds in azure local
+    for ds in local azure
     do
         echo -n "$testbase $ds"
         METAFLOW_DATASTORE=$ds $test $1 $1
