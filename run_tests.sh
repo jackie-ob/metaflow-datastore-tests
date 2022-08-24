@@ -2,7 +2,7 @@
 set -e
 
 
-if [ -z "$STORAGE_BACKEND_TO_TEST"]; then
+if [ -z "$STORAGE_BACKEND_TO_TEST" ]; then
 	# Hacky, but it will do
 	AWS_HOSTNAME_PATTERN='^ip\-'
 	if [[ $(hostname) =~ $AWS_HOSTNAME_PATTERN ]]; then
